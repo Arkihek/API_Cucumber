@@ -1,4 +1,4 @@
-package stepDefinations;
+package stepDefinitions;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;

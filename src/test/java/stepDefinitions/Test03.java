@@ -1,26 +1,30 @@
-package stepDefinations;
+package stepDefinitions;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
+
 
 import static io.restassured.RestAssured.given;
 
-public class Test02 {
+public class Test03 {
 
     static RequestSpecification spec;
 
     @Test
-    public void test01(){
+    public void test01() {
 
-        // https://www.heallifehospital.com/api/opdList endpoint'ine gecerli authorization bilgileri ile bir GET request gönderildiginde
-        // dönen status code'un 200 oldugu
-        // ve response message bilgisinin "Success" oldugu dogrulanmali
+        ///api/ipdList endpoint'ine gecerli authorization bilgileri ile bir GET request gönderildiginde
+        // dönen status code'un 200 oldugu ve
+        // response message bilgisinin "Success" oldugu dogrulanmali.
+        //http://www.heallifehospital.com/api/ipdList
+
         spec = new RequestSpecBuilder().setBaseUri("http://www.heallifehospital.com").build(); // ana sayfa oluşturuldu
 
-        spec.pathParams("pp1","api","pp2","opdList");// parametreler oluşturuldu
+        spec.pathParams("pp1","api","pp2","ipdList");// parametreler oluşturuldu
 
         String fullPath = "/{pp1}/{pp2}"; // parametre girişi için kolay bir string oluşturuldu
 
@@ -42,7 +46,6 @@ public class Test02 {
         System.out.println("************ Response **************");
         response.prettyPrint();
 
-
-
+        response.then().assertThat().statusCode(200).body("message", Matchers.equalTo("Success"));
     }
 }
